@@ -166,7 +166,6 @@ function agregarAlCarrito(productId) {
     }
 
     guardarCarrito(carrito);
-    alert('Producto agregado al carrito');
 }
 
 function actualizarContadorCarrito() {
@@ -193,6 +192,10 @@ function cerrarMenu() {
     document.getElementById('menuOverlay').classList.remove('active');
 }
 
+function mostrarModalCarrito() {
+    let modal = new bootstrap.Modal(document.getElementById('productoAgregadoModal'));
+    modal.show();
+}
 </script>
 <body class="bg-light">
 

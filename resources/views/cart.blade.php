@@ -61,9 +61,9 @@
                     <strong id="total">₡0</strong>
                 </div>
 
-                <button class="btn btn-dark w-100 mt-4">
-                    Finalizar compra
-                </button>
+               <button class="btn btn-dark w-100 mt-4" onclick="finalizarCompra()">
+    Finalizar compra
+</button>
 
                 <a href="{{ url('/') }}" class="btn btn-link w-100 mt-2">
                     Seguir comprando
@@ -73,7 +73,42 @@
     </div>
 
 </div>
+{{-- MODAL COMPRA EXITOSA --}}
+<div class="modal fade" id="compraExitosaModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4" style="border-radius: 12px;">
 
+            {{-- ICONO CHECK --}}
+            <div class="mb-3">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="12" fill="#28a745"/>
+                    <path d="M7 12.5L10.5 16L17 9.5" 
+                          stroke="white" 
+                          stroke-width="2.5" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            {{-- TITULO --}}
+            <h4 class="fw-bold mb-2">¡Compra exitosa!</h4>
+
+            {{-- TEXTO --}}
+            <p class="text-muted mb-4">
+                Tu pedido ha sido procesado correctamente.
+            </p>
+
+            {{-- BOTONES --}}
+            <div class="d-grid gap-2">
+                <a href="{{ url('/') }}" class="btn btn-dark">
+                    Ir al inicio
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
 <script>
 let productos = @json($products);
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -143,6 +178,21 @@ function eliminarProducto(id) {
     carrito = carrito.filter(p => p.id !== id);
     localStorage.setItem('carrito', JSON.stringify(carrito));
     renderCarrito();
+}
+
+function finalizarCompra() {
+    if (carrito.length === 0) {
+        alert('El carrito está vacío.');
+        return;
+    }
+
+    carrito = [];
+    localStorage.removeItem('carrito');
+
+    renderCarrito();
+
+    let modal = new bootstrap.Modal(document.getElementById('compraExitosaModal'));
+    modal.show();
 }
 
 renderCarrito();

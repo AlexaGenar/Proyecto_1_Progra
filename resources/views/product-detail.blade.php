@@ -106,7 +106,7 @@
 
     {{-- CARRITO --}}
   
-        <a href="#" class="ms-2" onclick="agregarAlCarrito({{ $product->id }})">
+    <a href="#" class="ms-2" onclick="agregarAlCarrito({{ $product->id }}); mostrarModalCarrito();">
     <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
 </a>
 
@@ -129,3 +129,39 @@
 </div>
 
 @endsection
+
+{{-- MODAL PRODUCTO AGREGADO --}}
+<div class="modal fade" id="productoAgregadoModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4" style="border-radius: 12px;">
+
+            <div class="mb-3">
+                <svg width="55" height="55" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="12" fill="#28a745"/>
+                    <path d="M7 12.5L10.5 16L17 9.5" 
+                          stroke="white" 
+                          stroke-width="2.5" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <h5 class="fw-bold mb-2">Producto agregado</h5>
+
+            <p class="text-muted mb-4">
+                El producto fue agregado al carrito correctamente.
+            </p>
+
+            <div class="d-grid gap-2">
+                <a href="{{ route('cart') }}" class="btn btn-dark">
+                    Ver carrito
+                </a>
+
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Seguir comprando
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
