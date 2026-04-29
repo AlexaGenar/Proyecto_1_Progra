@@ -21,21 +21,49 @@
     {{-- BOTONES --}}
     <div class="d-flex align-items-center">
 
-        <a href="#" class="me-3">
-            <img src="{{ asset('images/navbar/perfil.svg') }}" alt="Usuario" style="width:24px;">
-        </a>
+     <a href="#" class="no-style">
+    <span class="heart-icon me-3">♡</span>
+</a>
+     <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
+    <img src="{{ asset('images/navbar/perfil.svg') }}" alt="Usuario" style="width:24px;">
+</a>
 
-        <a href="#" class="me-3">
-            <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
-        </a>
-
-        <a href="#">
-            <img src="{{ asset('images/navbar/menu.svg') }}" alt="Menu" style="width:26px;">
-        </a>
+<a href="#" class="me-3 position-relative">
+    <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
+    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        0
+    </span>
+</a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                <img src="{{ asset('images/navbar/menu.svg') }}" alt="Menu" style="width:26px;">
+            </button>
 
     </div>
 
 </div>
+
+{{-- OVERLAY --}}
+<div id="menuOverlay" class="menu-overlay" onclick="cerrarMenu()"></div>
+
+   {{-- MENÚ LATERAL--}}
+   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menú</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <h5 class="mb-4">Marcas</h5>
+
+        <a href="{{ route('brands.products', 'Samsung') }}">Samsung</a>
+        <a href="{{ route('brands.products', 'Xiaomi') }}">Xiaomi</a>
+        <a href="{{ route('brands.products', 'Apple') }}">Apple</a>
+        <a href="{{ route('brands.products', 'Realme') }}">Realme</a>
+        <a href="{{ route('brands.products', 'Huawei') }}">Huawei</a>
+        <a href="{{ route('brands.products', 'Motorola') }}">Motorola</a>
+        <a href="{{ route('brands.products', 'Oppo') }}">Oppo</a>
+    </div>
+</div>
+
 
     <div class="row">
 

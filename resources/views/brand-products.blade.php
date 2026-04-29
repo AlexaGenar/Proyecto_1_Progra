@@ -21,11 +21,11 @@
         {{-- BOTONES --}}
         <div class="d-flex align-items-center">
 
-            <a href="{{ route('favorites') }}" class="text-decoration-none text-dark me-3">
+            <a href="#" class="text-decoration-none text-dark me-3">
                 <span class="heart-icon">♡</span>
             </a>
 
-            <a href="{{ route('cart') }}" class="me-3 position-relative">
+            <a href="#" class="me-3 position-relative">
                 <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
                 <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     0

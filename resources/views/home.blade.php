@@ -34,22 +34,22 @@
     {{-- BOTONES --}}
     <div class="d-flex align-items-center">
 
-     <a href="{{ route('favorites') }}" class="no-style">
+     <a href="#" class="no-style">
     <span class="heart-icon me-3">♡</span>
 </a>
-       <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
+     <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
     <img src="{{ asset('images/navbar/perfil.svg') }}" alt="Usuario" style="width:24px;">
 </a>
 
-       <a href="{{ route('cart') }}" class="me-3 position-relative">
+<a href="#" class="me-3 position-relative">
     <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
     <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
         0
     </span>
 </a>
-       <a href="#" onclick="abrirMenu(event)">
-    <img src="{{ asset('images/navbar/menu.svg') }}" alt="Menu" style="width:26px;">
-</a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                <img src="{{ asset('images/navbar/menu.svg') }}" alt="Menu" style="width:26px;">
+            </button>
 
     </div>
 
@@ -58,18 +58,25 @@
 {{-- OVERLAY --}}
 <div id="menuOverlay" class="menu-overlay" onclick="cerrarMenu()"></div>
 
-{{-- MENÚ LATERAL --}}
-<div id="sideMenu" class="side-menu">
-    <h5 class="mb-4">Marcas</h5>
+   {{-- MENÚ LATERAL--}}
+   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menú</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <h5 class="mb-4">Marcas</h5>
 
-    <a href="{{ route('brands.products', 'Samsung') }}">Samsung</a>
-<a href="{{ route('brands.products', 'Xiaomi') }}">Xiaomi</a>
-<a href="{{ route('brands.products', 'Apple') }}">Apple</a>
-<a href="{{ route('brands.products', 'Realme') }}">Realme</a>
-<a href="{{ route('brands.products', 'Huawei') }}">Huawei</a>
-<a href="{{ route('brands.products', 'Motorola') }}">Motorola</a>
-<a href="{{ route('brands.products', 'Oppo') }}">Oppo</a>
+        <a href="{{ route('brands.products', 'Samsung') }}">Samsung</a>
+        <a href="{{ route('brands.products', 'Xiaomi') }}">Xiaomi</a>
+        <a href="{{ route('brands.products', 'Apple') }}">Apple</a>
+        <a href="{{ route('brands.products', 'Realme') }}">Realme</a>
+        <a href="{{ route('brands.products', 'Huawei') }}">Huawei</a>
+        <a href="{{ route('brands.products', 'Motorola') }}">Motorola</a>
+        <a href="{{ route('brands.products', 'Oppo') }}">Oppo</a>
+    </div>
 </div>
+
 
  {{-- HERO CAROUSEL --}}
 <div id="carouselProductos" class="carousel slide mb-5" data-bs-ride="carousel">

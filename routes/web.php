@@ -35,16 +35,6 @@ Route::get('/productos/{id}', function ($id) {
     return view('product-detail', compact('product'));
 })->name('products.detail');
 
-Route::get('/favoritos', function () {
-    $products = \App\Models\Product::all();
-    return view('favorites', compact('products'));
-})->name('favorites');
-
-Route::get('/carrito', function () {
-    $products = \App\Models\Product::all();
-    return view('cart', compact('products'));
-})->name('cart');
-
 Route::get('/marcas/{brand}', function ($brand) {
     $products = \App\Models\Product::with('category')
         ->where('brand', $brand)
@@ -52,19 +42,20 @@ Route::get('/marcas/{brand}', function ($brand) {
 
     return view('brand-products', compact('products', 'brand'));
 })->name('brands.products');
+Route::get('/admin/login', function () {
+    return view('admin-login');  // Muestra la vista del formulario de login
+})->name('admin.login');
 
 Route::post('/admin/login', function (Request $request) {
     if ($request->user === 'admin' && $request->password === '1234') {
-        session(['admin_logged' => true]);
-        return redirect()->route('admin.products');
+        session(['admin_logged' => true]); // Guardar sesión del admin
+        return redirect()->route('admin.products'); // Redirigir al panel de administración
     }
-
     return back()->with('error', 'Usuario o contraseña incorrectos');
-})->name('admin.login');
-
+})->name('admin.login.submit');
 Route::get('/admin/productos', function () {
     if (!session('admin_logged')) {
-        return redirect('/');
+         return redirect()->route('admin.login');
     }
 
     $products = Product::with('category')->paginate(7);
