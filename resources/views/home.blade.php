@@ -34,19 +34,21 @@
     {{-- BOTONES --}}
     <div class="d-flex align-items-center">
 
-     <a href="#" class="no-style">
-    <span class="heart-icon me-3">♡</span>
+     <a href="{{ route('favorites.view') }}" class="no-style">
+    <span class="heart-icon me-3 {{ session('favorites') && count(session('favorites')) > 0 ? 'active' : '' }}">♡</span>
 </a>
+
      <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
     <img src="{{ asset('images/navbar/perfil.svg') }}" alt="Usuario" style="width:24px;">
 </a>
 
-<a href="#" class="me-3 position-relative">
-    <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
-    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        0
-    </span>
-</a>
+ <a href="{{ route('cart.view') }}" class="me-3 position-relative">
+            <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
+            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ session()->get('cart') ? count(session()->get('cart')) : 0 }}
+            </span>
+        </a>
+        
         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
                 <img src="{{ asset('images/navbar/menu.svg') }}" alt="Menu" style="width:26px;">
             </button>
@@ -140,11 +142,14 @@
        @forelse($products as $product)
     <div class="col-md-3 mb-4">
         <div class="card h-100 position-relative">
-            {{-- CORAZÓN --}}
-<button class="btn position-absolute top-0 end-0 m-2 p-0 border-0 bg-transparent"
-        onclick="toggleFavorito({{ $product->id }}, this)">
-    <span class="heart-icon">♡</span>
-</button>
+            {{-- Fav--}}
+
+<form action="{{ route('favorites.add', $product->id) }}" method="POST" class="position-relative">
+    @csrf
+    <button type="submit" class="btn position-absolute top-0 end-0 m-2 p-0 border-0 bg-transparent">
+        <span class="heart-icon {{ session('favorites') && isset(session('favorites')[$product->id]) ? 'active' : '' }}">♡</span>
+    </button>
+</form>
             <img 
                 src="{{ $product->image }}" 
                 class="card-img-top p-3" 

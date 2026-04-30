@@ -11,7 +11,16 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        return view('cart', compact('cart'));
+$subtotal = 0;
+    foreach ($cart as $item) {
+        $subtotal += $item['price'] * $item['quantity'];
+    }
+
+     $taxes = $subtotal * 0.13;
+
+       $total = $subtotal + $taxes;
+
+         return view('cart', compact('cart', 'subtotal', 'taxes', 'total'));
     }
 
     public function add($id)
