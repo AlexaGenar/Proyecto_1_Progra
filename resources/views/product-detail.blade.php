@@ -137,9 +137,12 @@
 
     {{-- CARRITO --}}
   
-    <a href="#" class="ms-2" onclick="agregarAlCarrito({{ $product->id }}); mostrarModalCarrito();">
-    <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
-</a>
+   <form action="{{ route('cart.add', $product->id) }}" method="POST">
+    @csrf
+    <button type="submit" class="ms-2">
+        <img src="{{ asset('images/navbar/carrito.svg') }}" alt="Carrito" style="width:26px;">
+    </button>
+</form>
 
     {{-- COMPRAR --}}
     <button class="btn btn-dark ms-2">
