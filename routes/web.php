@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\FavoriteController;
 
 Route::get('/', function () {
     $search = request('search');
@@ -103,3 +105,12 @@ Route::delete('/admin/productos/{id}', function ($id) {
 
     return redirect()->route('admin.products')->with('success', 'Producto eliminado correctamente');
 })->name('admin.products.destroy');
+
+Route::get('/carrito', [CartController::class, 'index'])->name('cart.view');
+Route::post('/carrito/agregar/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::delete('/carrito/eliminar/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/carrito/vaciar', [CartController::class, 'clear'])->name('cart.clear');
+
+Route::get('/favoritos', [FavoriteController::class, 'index'])->name('favorites.view');
+Route::post('/favoritos/agregar/{id}', [FavoriteController::class, 'add'])->name('favorites.add');
+Route::delete('/favoritos/eliminar/{id}', [FavoriteController::class, 'remove'])->name('favorites.remove');
